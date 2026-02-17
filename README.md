@@ -226,4 +226,4 @@ HabitatX aims to redefine how people find and manage spaces — transforming ren
 Built by developers, for real-world housing challenges.
 
 ```
-```
+
