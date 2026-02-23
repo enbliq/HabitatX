@@ -1,29 +1,29 @@
 # HabitatX
 
-Welcome to the **HabitatX** codebase! This repository is a **monorepo** powering the complete HabitatX platform — including the web application, backend services, and blockchain payment infrastructure.
+Welcome to **HabitatX**! This is a **monorepo** managing the frontend, backend API, and Stellar payment services for the HabitatX platform.
 
-HabitatX is a next-generation housing marketplace built to simplify renting. It helps property owners publish listings and manage tenants while enabling renters to discover trusted spaces, compare real experiences, and handle rent transactions digitally — without relying on traditional agents.
+HabitatX is a rental marketplace connecting **landlords** and **tenants** directly — removing middlemen by enabling property listings, transparent reviews, and seamless rent payments.
 
-We use **[pnpm workspaces](https://pnpm.io/workspaces)** for dependency management and **[TurboRepo](https://turbo.build/)** for fast, scalable builds.
+We use **[pnpm workspaces](https://pnpm.io/workspaces)** for dependency management and **[TurboRepo](https://turbo.build/)** for high-performance build orchestration.
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Monorepo:** pnpm workspaces + TurboRepo  
+- **Monorepo Manager:** pnpm workspaces + TurboRepo  
 - **Frontend:** React + TailwindCSS  
 - **Backend:** Node.js, Express, TypeScript  
-- **Payments Layer:** Stellar SDK  
+- **Payments:** Stellar SDK  
 - **Language:** TypeScript (Strict Mode)
 
 ---
 
-## 🛠 Requirements
+## 🛠 Prerequisites
 
-Before running the project, make sure you have:
+Before you start, ensure you have the following installed:
 
-1. **Node.js** (v18+)  
-2. **pnpm**
+1. **Node.js** (v18 or higher recommended)  
+2. **pnpm** (We use this instead of npm/yarn)
 
 ```bash
 corepack enable
@@ -33,197 +33,174 @@ npm install -g pnpm
 
 ---
 
-## ⚡ Quick Start
+## ⚡️ Getting Started
+
+Follow these steps to get the entire platform running locally.
 
 ### 1. Clone & Install
 
 ```bash
 git clone <your-repo-url>
-cd habitatx
+cd HabitatX
 
-# Install dependencies across all apps & packages
+# Install all dependencies for all apps and packages
 pnpm install
 ```
 
-### 2. Start Development
+### 2. Run Development Server
 
-Run all services together:
+This command starts **all** applications (Web, API, and Stellar Service) in parallel.
 
 ```bash
 pnpm dev
 ```
 
-Local services:
+You will see output from all services in your terminal. They are available at:
 
-* **Frontend:** [http://localhost:3000](http://localhost:3000)
-* **API Server:** [http://localhost:3001](http://localhost:3001)
-* **Payment Service:** [http://localhost:3002](http://localhost:3002)
+* **Web App:** [http://localhost:3000](http://localhost:3000)
+* **Backend API:** [http://localhost:3001](http://localhost:3001)
+* **Stellar Service:** [http://localhost:3002](http://localhost:3002)
 
 ---
 
-## 📦 Monorepo Structure
+## 📂 Project Structure
 
 ```text
-habitatx/
+HabitatX/
 ├── apps/
-│   ├── web/               # Client application (Renters & Owners)
-│   ├── api/               # Main REST API (Express)
-│   └── stellar-service/   # Blockchain payment & transaction handler
+│   ├── web/               # React Frontend (Tenant & Landlord Interface)
+│   ├── api/               # Core Backend API (Express + Node.js)
+│   └── stellar-service/   # Isolated Service for Payments
 │
 ├── packages/
-│   ├── types/             # Shared interfaces, schemas, DTOs
-│   ├── config/            # Shared linting & TS configurations
-│   └── ui/                # Reusable UI components
+│   ├── types/             # Shared TypeScript interfaces & DTOs
+│   ├── config/            # Shared configurations (TSConfig, ESLint)
+│   └── ui/                # Shared React UI components (Tailwind)
 │
-└── turbo.json             # TurboRepo pipeline
+└── turbo.json             # Build pipeline configuration
 ```
 
 ---
 
-## 📜 Scripts
+## 📜 Available Scripts
 
-Run from the project root:
+Run these from the **root** folder:
 
-| Command      | What it does                         |
-| ------------ | ------------------------------------ |
-| `pnpm dev`   | Starts all applications in dev mode  |
-| `pnpm build` | Builds all apps and shared packages  |
-| `pnpm lint`  | Runs lint checks across the monorepo |
-| `pnpm test`  | Runs tests (when available)          |
-| `pnpm clean` | Clears caches and build artifacts    |
+| Command      | Description                                  |
+| ------------ | -------------------------------------------- |
+| `pnpm dev`   | Starts all apps in development mode.         |
+| `pnpm build` | Builds all apps and packages for production. |
+| `pnpm lint`  | Runs ESLint across the entire monorepo.      |
+| `pnpm test`  | Runs tests for all packages (when added).    |
+| `pnpm clean` | Clears Turbo cache and artifacts.            |
 
 ---
 
-## ➕ Installing Dependencies
+## 🧩 Adding Dependencies
 
-Because HabitatX uses a monorepo setup, install dependencies inside the appropriate workspace.
+Since we use a monorepo, you must specify **where** to install a package.
 
-**Frontend example**
+**To add a library to the Frontend (`apps/web`):**
 
 ```bash
 cd apps/web
-pnpm add react-query
+pnpm add framer-motion
 ```
 
-**Backend example**
+**To add a library to the Backend (`apps/api`):**
 
 ```bash
 cd apps/api
-pnpm add prisma
+pnpm add mongoose
 ```
 
-**Using shared workspace packages**
+**To use a shared package (example: shared types):**
 
 ```bash
 cd apps/api
-pnpm add "@habitatx/types@workspace:*" -D
+pnpm add "@HabitatX/types@workspace:*" -D
 ```
 
 ---
 
-## 🧭 Platform Overview
+## 🏠 Core Platform Idea
 
-HabitatX is built around a dual-sided marketplace model.
+HabitatX is designed around two primary user roles:
 
-### 🧑 Renters
+### 👤 Tenants
 
-* Explore available homes, shops, and spaces
-* Compare listings using reviews and ratings
-* Contact owners directly
-* Manage renewals and payments online
+* Browse and discover properties
+* View building and landlord reviews
+* Apply directly without agents
+* Renew rent through the platform
 
-### 🏠 Property Owners
+### 🏢 Landlords
 
-* Publish and manage property listings
-* Track interest and tenant applications
-* Communicate directly with renters
-* Receive payments through integrated digital rails
-
----
-
-## 🌟 Reputation-Driven Housing
-
-HabitatX focuses heavily on **trust signals**.
-
-Every property can build a public reputation through:
-
-* Tenant reviews
-* Ratings
-* Experience feedback
-* Owner responsiveness
-
-This helps renters make smarter decisions and encourages higher standards from property owners.
+* Advertise houses, shops, lands, and buildings
+* Manage listings and tenants
+* Receive secure payments
+* Build credibility through reviews
 
 ---
 
-## 💸 Digital Payments
+## ⭐ Trust & Transparency
 
-HabitatX integrates with the **Stellar ecosystem** to support secure, low-friction rent payments and renewals.
-
-Blockchain usage is intentionally focused on payments to keep the user experience simple and practical.
+HabitatX introduces a reputation layer where tenants can leave honest reviews about properties and landlords, helping create a more transparent and trustworthy rental ecosystem.
 
 ---
 
-## 🧯 Common Issues
+## 💸 Payments
 
-### Dependency or Type Errors
+Rent payments and renewals are powered by the **Stellar ecosystem**, enabling efficient and secure transactions.
+
+---
+
+## ⚠️ Troubleshooting
+
+**"Module not found" or Type Errors**
+
+If you just pulled fresh code or switched branches:
 
 ```bash
 pnpm install
-
-# If problems persist:
+# If issues persist, force a clean install
 rm -rf node_modules
 pnpm install
 ```
 
-### Files unexpectedly ignored by Git
+**Git is ignoring files I want to commit**
 
-Build outputs and dependencies are intentionally excluded.
+We strictly ignore `node_modules` and build artifacts (`dist`, build caches).
 
-If needed:
+* **Do not** force commit `node_modules`.
+* If your `node_modules` are showing up in Git:
 
 ```bash
 git rm -r --cached .
 git add .
-git commit -m "fix: reset git cache"
+git commit -m "fix: clear cached node_modules"
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contribution Guidelines
 
-HabitatX is open-source and built for collaboration.
+HabitatX is open-source and community-driven — contributions are welcome from developers of all levels.
 
-We welcome:
+1. Always run `pnpm lint` before pushing.
+2. Keep shared logic (types, configs, UI) inside `packages/`.
+3. Do not edit `apps/*/node_modules` manually.
+4. Keep PRs focused and clearly described.
 
-* Feature contributions
-* Performance improvements
-* UI/UX enhancements
-* Documentation updates
-* Bug fixes
-
-Contribution basics:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make focused commits
-4. Open a Pull Request
-
-Please run:
-
-```bash
-pnpm lint
-```
-
-before submitting PRs.
+Whether you are fixing bugs, improving UI, or adding core features — your contribution matters.
 
 ---
 
-## 🔮 Vision
+## 🚀 Vision
 
-HabitatX aims to redefine how people find and manage spaces — transforming renting into a transparent, community-driven experience where reputation, convenience, and digital payments work together.
+HabitatX aims to become a trusted, agent-free rental marketplace where tenants and landlords connect directly, backed by community reviews and seamless digital payments.
 
-Built by developers, for real-world housing challenges.
+Built with ❤️ by the community.
 
 ```
-
+```
